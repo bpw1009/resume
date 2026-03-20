@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benjamin P. Weckerle — Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-light: #555;
+    --ink-faint: #888;
+    --bg: #fafaf8;
+    --bg-warm: #f5f4f0;
+    --accent: #2d5a3d;
+    --accent-light: #e8f0eb;
+    --accent-glow: #3a7a52;
+    --tag-bg: #eef3f0;
+    --tag-border: #c8d8cf;
+    --highlight: rgba(45, 90, 61, 0.06);
+    --border: #ddd;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 40px 60px;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  header h1 {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  header .contact {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+
+  header .contact span {
+    margin: 0 8px;
+    color: var(--ink-faint);
+  }
+
+  header .contact a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-light);
+    transition: border-color 0.2s;
+  }
+
+  header .contact a:hover {
+    border-color: var(--accent);
+  }
+
+  /* Legend bar */
+  .legend-bar {
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-bottom: 32px;
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .legend-bar .icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .legend-bar em {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+
+  /* Skills grid */
+  .skills-grid {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .skill-label {
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 160px;
+    color: var(--ink);
+  }
+
+  .skill-value {
+    color: var(--ink-light);
+  }
+
+  /* Experience blocks */
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1px;
+  }
+
+  .exp-company {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .exp-location {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+  }
+
+  .exp-role-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .exp-role {
+    font-weight: 500;
+    font-size: 0.92rem;
+  }
+
+  .exp-dates {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+  }
+
+  .exp-block {
+    margin-bottom: 20px;
+  }
+
+  /* Bullet items */
+  .bullet {
+    position: relative;
+    padding: 8px 12px;
+    margin: 0 -12px 4px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--ink);
+    cursor: default;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    gap: 10px;
+  }
+
+  .bullet::before {
+    content: "•";
+    flex-shrink: 0;
+    color: var(--ink-faint);
+  }
+
+  .bullet:hover {
+    background: var(--highlight);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+
+  .bullet .text { flex: 1; }
+
+  /* Tags on hover */
+  .jd-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+  }
+
+  .bullet:hover .jd-tags,
+  .project-bullet:hover .jd-tags {
+    max-height: 120px;
+    opacity: 1;
+    margin-top: 8px;
+  }
+
+  .jd-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 4px;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+
+  .jd-tag.do-tag {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--tag-border);
+  }
+
+  .jd-tag.bring-tag {
+    background: #f0f0f5;
+    color: #4a4a6a;
+    border: 1px solid #c8c8d8;
+  }
+
+  /* Projects */
+  .project-bullet {
+    position: relative;
+    padding: 8px 12px;
+    margin: 0 -12px 4px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--ink);
+    cursor: default;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    gap: 10px;
+  }
+
+  .project-bullet::before {
+    content: "•";
+    flex-shrink: 0;
+    color: var(--ink-faint);
+  }
+
+  .project-bullet:hover {
+    background: var(--highlight);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+
+  .project-bullet .text { flex: 1; }
+
+  .project-bullet .jd-tags {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.25s ease, margin 0.3s ease;
+  }
+
+  /* Education */
+  .edu-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+  }
+
+  .edu-school {
+    font-family: var(--serif);
+    font-weight: 600;
+  }
+
+  .edu-detail {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+
+  .edu-right {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    white-space: nowrap;
+  }
+
+  /* Footer */
+  .footer-note {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    text-align: center;
+  }
+
+  /* Print */
+  @media print {
+    .legend-bar, .footer-note { display: none; }
+    .bullet:hover, .project-bullet:hover { background: none; box-shadow: none; }
+    .jd-tags { display: none !important; }
+  }
+
+  @media (max-width: 600px) {
+    .page { padding: 24px 18px 40px; }
+    header h1 { font-size: 1.7rem; }
+    .skill-row { flex-direction: column; gap: 2px; }
+    .skill-label { min-width: unset; }
+    .exp-header, .exp-role-line { flex-direction: column; gap: 2px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Benjamin P. Weckerle</h1>
+    <div class="contact">
+      Pacifica, CA 94044 <span>·</span> (305) 609-5193 <span>·</span> Benjamin.Weckerle@unh.edu <span>·</span> <a href="https://linkedin.com/in/benweckerle" target="_blank">linkedin.com/in/benweckerle</a> <span>·</span> <a href="https://github.com/bpw1009" target="_blank">github.com/bpw1009</a>
+    </div>
+  </header>
+
+  <div class="legend-bar">
+    <span class="icon">◆</span>
+    <span><em>Hover over any bullet</em> to see which job requirements it maps to. <span class="jd-tag do-tag" style="display:inline-block; vertical-align:middle;">What you'll do</span> <span class="jd-tag bring-tag" style="display:inline-block; vertical-align:middle;">What you'll bring</span></span>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Technical Skills &amp; Expertise</div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <span class="skill-label">Programming &amp; Tools</span>
+        <span class="skill-value">SQL, Python (pandas, numpy, PySpark, scikit-learn), GCP (BigQuery), Apache Spark, Hadoop Ecosystem (Hive, Pig), NoSQL, Git/GitHub, Tableau, AWS</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Data Engineering</span>
+        <span class="skill-value">ETL Pipeline Development, Data Modeling, Workflow Orchestration, Data Integration, Data Quality &amp; Validation, Data Infrastructure</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Statistical Methods</span>
+        <span class="skill-value">A/B Testing &amp; Experimentation, Regression Analysis, Machine Learning, Causal Inference</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-label">Domain Expertise</span>
+        <span class="skill-value">Retail Media, E-Commerce &amp; Marketplace Data, AdTech Systems (DSP/SSP), Data Governance, Cross-Functional Collaboration</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Experience</div>
+
+    <!-- Walmart Connect -->
+    <div class="exp-block">
+      <div class="exp-header">
+        <span class="exp-company">Walmart Connect</span>
+        <span class="exp-location">San Bruno, CA</span>
+      </div>
+      <div class="exp-role-line">
+        <span class="exp-role">Manager, Advanced Analytics</span>
+        <span class="exp-dates">2023–Present</span>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Built multi-step data transformation workflows in Python and SQL on GCP BigQuery to process high-volume advertising event data, establishing source-of-truth datasets for cross-platform analytics and closed-loop measurement
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Design &amp; maintain scalable pipelines &amp; ETL</span>
+            <span class="jd-tag do-tag">Extract, transform, integrate data</span>
+            <span class="jd-tag bring-tag">Extensive DE experience: transformation, modeling, ETL</span>
+            <span class="jd-tag bring-tag">Scalable pipelines in cloud &amp; big data environments</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Built source data pipelines and evaluation metrics dashboard for RAG-based chatbot prototype, collaborating with product and engineering teams across iterations
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Collaborate cross-functionally on data requirements</span>
+            <span class="jd-tag do-tag">Analyze complex data flows &amp; propose solutions</span>
+            <span class="jd-tag bring-tag">Collaborate cross-functionally &amp; communicate technical concepts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Enforced data governance policies including pre-earnings data embargo controls; managed DG approval workflows for new metrics and analyses, ensuring compliance with internal data privacy and security standards
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Deploy code to support data governance standards</span>
+            <span class="jd-tag bring-tag">Data governance, quality frameworks, regulatory requirements</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Built data models and feature engineering pipelines for customer propensity scoring using market basket analysis and demographic data; delivered structured datasets for advertiser targeting
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Translate requirements into data models &amp; architectures</span>
+            <span class="jd-tag do-tag">Extract, transform, integrate — ensuring quality</span>
+            <span class="jd-tag bring-tag">Design &amp; implement scalable data models</span>
+            <span class="jd-tag bring-tag">Support analytics via data sourcing, integration, validation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ForHealth -->
+    <div class="exp-block">
+      <div class="exp-header">
+        <span class="exp-company">UMass Chan Medical School, ForHealth Consulting</span>
+        <span class="exp-location">Boston, MA</span>
+      </div>
+      <div class="exp-role-line">
+        <span class="exp-role">Data Analyst</span>
+        <span class="exp-dates">2020–2023</span>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Automated data processing workflows using Python and Tableau Server Client library to orchestrate ETL flows, replacing manual copy-paste processes and enabling consistent daily delivery of analytical datasets
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Design &amp; maintain scalable pipelines &amp; ETL</span>
+            <span class="jd-tag do-tag">Automate data processing</span>
+            <span class="jd-tag do-tag">Analyze complex data flows &amp; propose improvements</span>
+            <span class="jd-tag bring-tag">Extensive DE experience: transformation, modeling, ETL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Built data transformation and feature engineering pipelines for predictive models; applied NLP and text processing to transform unstructured data into structured analytical datasets
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Extract, transform, integrate data</span>
+            <span class="jd-tag bring-tag">Extensive DE experience: transformation, modeling, ETL</span>
+            <span class="jd-tag bring-tag">Proficiency in SQL and Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Sourced and integrated data across SQL databases, flat files, and APIs using Python and SQL to support program evaluation; built Tableau dashboards for ongoing operational reporting
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Extract, transform, integrate from internal &amp; external sources</span>
+            <span class="jd-tag bring-tag">Support analytics via data sourcing, integration, validation</span>
+            <span class="jd-tag bring-tag">Proficiency in SQL and Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cogito -->
+    <div class="exp-block">
+      <div class="exp-header">
+        <span class="exp-company">Cogito Corporation</span>
+        <span class="exp-location">Boston, MA</span>
+      </div>
+      <div class="exp-role-line">
+        <span class="exp-role">Contract Data Analyst</span>
+        <span class="exp-dates">December 2019–March 2020</span>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Built and maintained automated data pipelines feeding Tableau dashboards on Tableau Server for internal and external users; queried and processed large datasets using AWS and SQL in a product-led sprint cadence
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Design &amp; maintain scalable pipelines &amp; ETL</span>
+            <span class="jd-tag do-tag">Implement solutions using cloud platforms</span>
+            <span class="jd-tag bring-tag">Scalable pipelines in cloud &amp; big data environments</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bionic -->
+    <div class="exp-block">
+      <div class="exp-header">
+        <span class="exp-company">Bionic Advertising Systems</span>
+        <span class="exp-location">Hanover, NH</span>
+      </div>
+      <div class="exp-role-line">
+        <span class="exp-role">Data Analyst and Market Intelligence Specialist</span>
+        <span class="exp-dates">2016–2018</span>
+      </div>
+
+      <div class="bullet">
+        <div class="text">
+          Integrated and transformed marketing data from thousands of external sources into unified data products; analyzed customer data to drive onboarding process improvements
+          <div class="jd-tags">
+            <span class="jd-tag do-tag">Extract, transform, integrate from internal &amp; external sources</span>
+            <span class="jd-tag bring-tag">Support analytics via data sourcing, integration, validation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="section">
+    <div class="section-title">Selected Projects</div>
+
+    <div class="project-bullet">
+      <div class="text">
+        Built end-to-end data pipeline using Apache Airflow and GCP BigQuery to orchestrate daily ingestion and transformation of Google Analytics 4 e-commerce event data, with automated scheduling and data quality checks
+        <div class="jd-tags">
+          <span class="jd-tag do-tag">Design &amp; maintain scalable pipelines &amp; ETL</span>
+          <span class="jd-tag do-tag">Automate data processing</span>
+          <span class="jd-tag bring-tag">Scalable pipelines in cloud &amp; big data environments</span>
+          <span class="jd-tag bring-tag">Extensive DE experience: transformation, modeling, ETL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-bullet">
+      <div class="text">
+        Built e-commerce conversion funnel dashboard on Tableau Public using GA4 data to visualize session-to-purchase drop-off and identify optimization opportunities
+        <div class="jd-tags">
+          <span class="jd-tag bring-tag">Support analytics via data sourcing, integration, validation</span>
+          <span class="jd-tag bring-tag">Proficiency in SQL and Python</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section">
+    <div class="section-title">Education</div>
+    <div class="edu-line">
+      <span><span class="edu-school">University of New Hampshire</span> — M.S. Analytics and Data Science</span>
+      <span class="edu-right">May 2019 · GPA: 3.89</span>
+    </div>
+    <div class="edu-detail">Statistical Methods, Predictive Analytics, Machine Learning, Design of Experiments</div>
+
+    <div class="edu-line">
+      <span><span class="edu-school">Florida International University</span> — B.S. International Business</span>
+      <span class="edu-right">May 2012 · GPA: 3.54</span>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Hover over any bullet to see JD requirement mappings.<br>
+    <span class="jd-tag do-tag" style="display:inline-block; margin-top: 6px;">Green</span> = "What you'll do" &nbsp;
+    <span class="jd-tag bring-tag" style="display:inline-block;">Purple</span> = "What you'll bring"
+  </div>
+
+</div>
+</body>
+</html>
